@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  p This is LAB 10 - Assignment 10 by Shivani Kandikonda.
+  button(type="button", class="btn btn-secondary", onclick="double()") I am a button
+  div#double Up the amount
+  script.
+    let value = 0
+    let power = 1
+    function  double(){
+      value += 1 
+      power *= 2
+      document.getElementById("double").innerHTML = "Two to the power " + value + " is " + power 
+    } 
+
+  a(href="/dreamdestination") View Dream Destination Page
