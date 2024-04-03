@@ -1,8 +1,22 @@
 var dreamdestination = require('../models/dreamdestination');
+
 // List of all dreamdestinations
-exports.dreamdestination_list = function(req, res) {
- res.send('NOT IMPLEMENTED: dreamdestination list');
+exports.dreamdestination_list = async function (req, res) {
+    try {
+        thedreamdestinations = await dreamdestination.find();
+        res.send(thedreamdestinations);
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
 };
+
+// List of all dreamdestinations
+// exports.dreamdestination_list = function(req, res) {
+//  res.send('NOT IMPLEMENTED: dreamdestination list');
+// };
+
 // for a specific dreamdestination.
 exports.dreamdestination_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: dreamdestination detail: ' + req.params.id);
