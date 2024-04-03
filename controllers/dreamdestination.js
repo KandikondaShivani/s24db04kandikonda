@@ -33,3 +33,16 @@ exports.dreamdestination_delete = function(req, res) {
 exports.dreamdestination_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: dreamdestination update PUT' + req.params.id);
 };
+
+// VIEWS
+// Handle a show all view
+exports.dreamdestination_view_all_Page = async function(req, res) {
+    try{
+    thedreamdestinations = await dreamdestination.find();
+    res.render('dreamdestination', { title: 'dreamdestination Search Results', results: thedreamdestinations });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    } 
+   };

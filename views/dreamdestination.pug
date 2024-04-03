@@ -2,7 +2,8 @@ extends layout
 
 block content
   h1= title
-  - let results = [{name: "Maldives", location: "South Asia", rating: 4.9},{name: "Bora Bora", location: "France", rating: 4.8},{name: "Maui", location: "USA", rating: 4.7}]
+  - let items = results
+  //- - let results = [{name: "Maldives", location: "South Asia", rating: 4.9},{name: "Bora Bora", location: "France", rating: 4.8},{name: "Maui", location: "USA", rating: 4.7}]
   div(class="container-fluid")
     div(class="row")
       each dreamdestination,index in results
