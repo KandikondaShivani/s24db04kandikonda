@@ -9,7 +9,7 @@ block content
       each dreamdestination,index in results
         div(class="col-sm-2")
           h4 Destination #{index + 1}
-          p #{dreamdestination.name} - #{dreamdestination.location} - #{dreamdestination.rating}
+          p #{dreamdestination.destinationname} - #{dreamdestination.location} - #{dreamdestination.rating}
           div(onclick=`buy(${index})`, class="btn btn-primary") Buy
   
   script. 

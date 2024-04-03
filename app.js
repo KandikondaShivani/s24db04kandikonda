@@ -69,7 +69,7 @@ async function recreateDB(){
  await dreamdestination.deleteMany();
 
 let instance1 = new 
-dreamdestination({name: "Maldives", location: "South Asia", rating: 4.9 });
+dreamdestination({destinationname: "Maldives", location: "South Asia", rating: 4.9 });
  instance1.save().then(doc=>{
  console.log("First object saved")}
  ).catch(err=>{
@@ -77,7 +77,7 @@ dreamdestination({name: "Maldives", location: "South Asia", rating: 4.9 });
  });
 
  let instance2 = new 
-dreamdestination({name: "Bora Bora", location: "France", rating: 4.8});
+dreamdestination({destinationname: "Bora Bora", location: "France", rating: 4.8});
  instance2.save().then(doc=>{
  console.log("Second object saved")}
  ).catch(err=>{
@@ -85,7 +85,7 @@ dreamdestination({name: "Bora Bora", location: "France", rating: 4.8});
  });
 
  let instance3 = new 
-dreamdestination({name: "Maui", location: "USA", rating: 4.7});
+dreamdestination({destinationname: "Maui", location: "USA", rating: 4.7});
  instance3.save().then(doc=>{
  console.log("Third object saved")}
  ).catch(err=>{

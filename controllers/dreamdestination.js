@@ -22,9 +22,31 @@ exports.dreamdestination_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: dreamdestination detail: ' + req.params.id);
 };
 // Handle dreamdestination create on POST.
-exports.dreamdestination_create_post = function(req, res) {
- res.send('NOT IMPLEMENTED: dreamdestination create POST');
-};
+// exports.dreamdestination_create_post = function(req, res) {
+//  res.send('NOT IMPLEMENTED: dreamdestination create POST');
+// };
+
+// Handle dreamdestination create on POST.
+exports.dreamdestination_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new dreamdestination();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"dreamdestination_type":"goat", "cost":12, "size":"large"}
+    document.destinationname = req.body.destinationname;
+    document.location = req.body.location;
+    document.rating = req.body.rating;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    } 
+   };
+
 // Handle dreamdestination delete from on DELETE.
 exports.dreamdestination_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: dreamdestination delete DELETE ' + req.params.id);
