@@ -18,9 +18,22 @@ exports.dreamdestination_list = async function (req, res) {
 // };
 
 // for a specific dreamdestination.
-exports.dreamdestination_detail = function(req, res) {
- res.send('NOT IMPLEMENTED: dreamdestination detail: ' + req.params.id);
-};
+// exports.dreamdestination_detail = function(req, res) {
+//  res.send('NOT IMPLEMENTED: dreamdestination detail: ' + req.params.id);
+// };
+
+// for a specific dreamdestination.
+exports.dreamdestination_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await dreamdestination.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+   };
+
 // Handle dreamdestination create on POST.
 // exports.dreamdestination_create_post = function(req, res) {
 //  res.send('NOT IMPLEMENTED: dreamdestination create POST');
