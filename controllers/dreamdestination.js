@@ -46,7 +46,7 @@ exports.dreamdestination_create_post = async function(req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"dreamdestination_type":"goat", "cost":12, "size":"large"}
+    // {"dreamdestination_type":"goat", "loacation":12, "rating":"large"}
     document.destinationname = req.body.destinationname;
     document.location = req.body.location;
     document.rating = req.body.rating;
@@ -65,8 +65,29 @@ exports.dreamdestination_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: dreamdestination delete DELETE ' + req.params.id);
 };
 // Handle dreamdestination update form on PUT.
-exports.dreamdestination_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: dreamdestination update PUT' + req.params.id);
+// exports.dreamdestination_update_put = function(req, res) {
+//  res.send('NOT IMPLEMENTED: dreamdestination update PUT' + req.params.id);
+// };
+
+// Handle dreamdestination update form on PUT.
+exports.dreamdestination_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body 
+   ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await dreamdestination.findById(req.params.id)
+        // Do updates of properties
+        if (req.body.destinationname)
+            toUpdate.destinationname = req.body.destinationname;
+        if (req.body.location) toUpdate.location = req.body.location;
+        if (req.body.rating) toUpdate.rating = req.body.rating;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+   failed`);
+    }
 };
 
 // VIEWS
