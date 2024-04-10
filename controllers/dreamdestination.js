@@ -23,16 +23,16 @@ exports.dreamdestination_list = async function (req, res) {
 // };
 
 // for a specific dreamdestination.
-exports.dreamdestination_detail = async function(req, res) {
+exports.dreamdestination_detail = async function (req, res) {
     console.log("detail" + req.params.id)
     try {
-    result = await dreamdestination.findById( req.params.id)
-    res.send(result)
+        result = await dreamdestination.findById(req.params.id)
+        res.send(result)
     } catch (error) {
-    res.status(500)
-    res.send(`{"error": document for id ${req.params.id} not found`);
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
     }
-   };
+};
 
 // Handle dreamdestination create on POST.
 // exports.dreamdestination_create_post = function(req, res) {
@@ -40,7 +40,7 @@ exports.dreamdestination_detail = async function(req, res) {
 // };
 
 // Handle dreamdestination create on POST.
-exports.dreamdestination_create_post = async function(req, res) {
+exports.dreamdestination_create_post = async function (req, res) {
     console.log(req.body)
     let document = new dreamdestination();
     // We are looking for a body, since POST does not have query parameters.
@@ -50,20 +50,34 @@ exports.dreamdestination_create_post = async function(req, res) {
     document.destinationname = req.body.destinationname;
     document.location = req.body.location;
     document.rating = req.body.rating;
-    try{
-    let result = await document.save();
-    res.send(result);
+    try {
+        let result = await document.save();
+        res.send(result);
     }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
-    } 
-   };
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};
 
 // Handle dreamdestination delete from on DELETE.
-exports.dreamdestination_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: dreamdestination delete DELETE ' + req.params.id);
+// exports.dreamdestination_delete = function(req, res) {
+//  res.send('NOT IMPLEMENTED: dreamdestination delete DELETE ' + req.params.id);
+// };
+
+// Handle dreamdestination delete on DELETE.
+exports.dreamdestination_delete = async function (req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await dreamdestination.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
+
 // Handle dreamdestination update form on PUT.
 // exports.dreamdestination_update_put = function(req, res) {
 //  res.send('NOT IMPLEMENTED: dreamdestination update PUT' + req.params.id);
@@ -92,13 +106,41 @@ exports.dreamdestination_update_put = async function (req, res) {
 
 // VIEWS
 // Handle a show all view
-exports.dreamdestination_view_all_Page = async function(req, res) {
+exports.dreamdestination_view_all_Page = async function (req, res) {
+    try {
+        thedreamdestinations = await dreamdestination.find();
+        res.render('dreamdestination', { title: 'dreamdestination Search Results', results: thedreamdestinations });
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};
+
+// Handle a show one view with id specified by query
+exports.dreamdestination_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
     try{
-    thedreamdestinations = await dreamdestination.find();
-    res.render('dreamdestination', { title: 'dreamdestination Search Results', results: thedreamdestinations });
+    result = await dreamdestination.findById( req.query.id)
+    res.render('dreamdestinationdetail', 
+   { title: 'dreamdestination Detail', toShow: result });
     }
     catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
-    } 
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   // Handle building the view for creating a dreamdestination.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.dreamdestination_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('dreamdestinationcreate', { title: 'dreamdestination Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
    };

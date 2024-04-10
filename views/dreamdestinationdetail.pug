@@ -1,0 +1,20 @@
+extends layout
+block content
+    h1= title
+    - let dreamdestinationid = toShow._id
+    - let destinationname = toShow.destinationname
+    - let location = toShow.location
+    - let rating = toShow.rating
+    div
+        div.row
+            div(class='dreamdestinationAttr mr-3') DreamDestination ID is:
+            div #{dreamdestinationid}
+        div.row
+            div(class='dreamdestinationAttr mr-3') Destination Name is:
+            div #{destinationname}
+        div.row
+            div(class='dreamdestinationAttr mr-3') Location is:
+            div #{rating}
+        div.row
+            div(class='dreamdestinationAttr mr-3') Rating is:
+            div #{location}

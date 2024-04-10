@@ -6,6 +6,12 @@ var router = express.Router();
 router.get('/', dreamdestination_controlers.dreamdestination_view_all_Page );
 module.exports = router;
 
+/* GET detail dreamdestination page */
+router.get('/detail', dreamdestination_controlers.dreamdestination_view_one_Page);
+
+/* GET create dreamdestination page */
+router.get('/create', dreamdestination_controlers.dreamdestination_create_Page);
+
 // var express = require('express');
 // var router = express.Router();
 
