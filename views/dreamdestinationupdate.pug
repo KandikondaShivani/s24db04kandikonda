@@ -1,41 +1,46 @@
 extends layout
 
 block content
+ div(class="container-fluid p-5 bg-primary text-white text-center")
     h1= title
-    - let dreamdestinationid = toShow._id
-    - let destinationname = toShow.destinationname
-    - let dreamdestinationlocation = toShow.location
-    - let dreamdestinationrating = toShow.rating
+
+    if(toShow == null)
+        h2 No instance to update 
+    else
+        - let dreamdestinationid = toShow._id
+        - let destinationname = toShow.destinationname
+        - let dreamdestinationlocation = toShow.location
+        - let dreamdestinationrating = toShow.rating
  
-    div.row(class='mb-2')
-        div.mr-1 ID is
-        div #{dreamdestinationid}
-        - let actionid = "/resource/dreamdestination/" + dreamdestinationid
-        form(id='dreamdestinationForm', action= actionid, method="PUT")
-            div.form-group
-                label.dreamdestinationAttr(for='destinationname') destinationname
-                input#destinationname(type='text', name='destinationname', value= destinationname )
-            div.form-group
-                label.dreamdestinationAttr(for='location') location
-                input#location(type='text', name='location', value= dreamdestinationlocation )
-            div.form-group
-                label.dreamdestinationAttr(for='rating') rating
-                input#rating(type='number', name='rating', value= dreamdestinationrating )
-            input(type="submit")
-    script.
-        document.forms['dreamdestinationForm'].addEventListener('submit', (event) => {
-            event.preventDefault();
-            // TODO do something here to show user that form is being submitted
-            fetch(event.target.action, {
-                method: 'PUT',
-                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-            }).then((resp) => {
-                return resp.json(); // or resp.text() or whatever the server sends
-            }).then((body) => {
-                alert("Update succeded")
-                // TODO handle body
-            }).catch((error) => {
-            // TODO handle error
+        div.row(class="container-fluid p-2 bg-dark text-white")
+            div.mr-1 ID is
+            div #{dreamdestinationid}
+            - let actionid = "/resource/dreamdestination/" + dreamdestinationid
+            form(id='dreamdestinationForm', action= actionid, method="PUT", class="p-2 bg-dark flex-fill")
+                div.form-group(class="p-2 text-white flex-fill")
+                    label.dreamdestinationAttr(for='destinationname', style="width: 120px") destinationname
+                    input#destinationname(type='text', name='destinationname', value= destinationname )
+                div.form-group(class="p-2 text-white flex-fill")
+                    label.dreamdestinationAttr(for='location', style="width: 120px") location
+                    input#location(type='text', name='location', value= dreamdestinationlocation )
+                div.form-group(class="p-2 text-white flex-fill")
+                    label.dreamdestinationAttr(for='rating', style="width: 120px") rating
+                    input#rating(type='number', name='rating', value= dreamdestinationrating )
+                input(type="submit", class="btn btn-primary m-2")
+        script.
+            document.forms['dreamdestinationForm'].addEventListener('submit', (event) => {
+                event.preventDefault();
+                // TODO do something here to show user that form is being submitted
+                fetch(event.target.action, {
+                    method: 'PUT',
+                    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+                }).then((resp) => {
+                    return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                    alert("Update succeded")
+                    // TODO handle body
+                }).catch((error) => {
+                // TODO handle error
                 alert("Update failed " + error )
+                });
             });
-        });
