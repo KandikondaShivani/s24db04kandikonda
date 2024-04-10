@@ -12,6 +12,9 @@ router.get('/detail', dreamdestination_controlers.dreamdestination_view_one_Page
 /* GET create dreamdestination page */
 router.get('/create', dreamdestination_controlers.dreamdestination_create_Page);
 
+/* GET create update page */
+router.get('/update', dreamdestination_controlers.dreamdestination_update_Page);
+
 // var express = require('express');
 // var router = express.Router();
 

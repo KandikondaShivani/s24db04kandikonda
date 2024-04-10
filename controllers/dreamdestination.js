@@ -144,3 +144,17 @@ exports.dreamdestination_create_Page = function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
    };
+
+// Handle building the view for updating a dreamdestination.
+// query provides the id
+exports.dreamdestination_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+        let result = await dreamdestination.findById(req.query.id)
+        res.render('dreamdestinationupdate', { title: 'dreamdestination Update', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
