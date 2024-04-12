@@ -6,14 +6,21 @@ block content
   - let items = results
   //- - let results = [{name: "Maldives", location: "South Asia", rating: 4.9},{name: "Bora Bora", location: "France", rating: 4.8},{name: "Maui", location: "USA", rating: 4.7}]
   div(class="container-fluid")
-    div(class="row")
+    div(class="row m-1")
       each dreamdestination,index in results
-        div(class="col-sm-2")
-          h4 Destination #{index + 1}
-          p #{dreamdestination.destinationname} - #{dreamdestination.location} - #{dreamdestination.rating}
-          div(onclick=`buy(${index})`, class="btn btn-primary") Buy
+        - let destination = `dispatch(\"/dreamdestination/update?id=${dreamdestination._id}\")`
+        div(class="row-sm-2", class="m-1" ) Dream Destination #{dreamdestination.destinationname}(#{dreamdestination.location}) is #{dreamdestination.rating}
+         button.btn( class="btn-primary ml-1", onclick= destination) Update 
   
   script. 
     function buy(index) {
       alert(`You purchased item ${index + 1}`);
     }
+
+    function dispatch(path){
+      window.location.href=path
+    }
+
+  
+    
+
