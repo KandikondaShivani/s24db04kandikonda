@@ -5,12 +5,15 @@ block content
   h1= title
   - let items = results
   //- - let results = [{name: "Maldives", location: "South Asia", rating: 4.9},{name: "Bora Bora", location: "France", rating: 4.8},{name: "Maui", location: "USA", rating: 4.7}]
+  a(class="btn btn-success" href="/dreamdestination/create") Create
   div(class="container-fluid")
     div(class="row m-1")
       each dreamdestination,index in results
         - let destination = `dispatch(\"/dreamdestination/update?id=${dreamdestination._id}\")`
         div(class="row-sm-2", class="m-1" ) Dream Destination #{dreamdestination.destinationname}(#{dreamdestination.location}) is #{dreamdestination.rating}
          button.btn( class="btn-primary ml-1", onclick= destination) Update 
+         a(class="btn btn-danger" href=`/dreamdestination/delete?id=${dreamdestination._id}`) Delete
+         a(class="btn btn-warning" href=`/dreamdestination/detail?id=${dreamdestination._id}`) Details
   
   script. 
     function buy(index) {
