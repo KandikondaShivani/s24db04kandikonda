@@ -4,7 +4,6 @@ const dreamdestination_controlers= require('../controllers/dreamdestination');
 var router = express.Router();
 
 // A little function to check if we have an authorized user and continue on
-or
 // redirect to login.
 const secured = (req, res, next) => {
  if (req.user){
@@ -21,13 +20,13 @@ module.exports = router;
 router.get('/detail', dreamdestination_controlers.dreamdestination_view_one_Page);
 
 /* GET create dreamdestination page */
-router.get('/create', dreamdestination_controlers.dreamdestination_create_Page);
+router.get('/create', secured, dreamdestination_controlers.dreamdestination_create_Page);
 
 /* GET create update page */
 router.get('/update',secured, dreamdestination_controlers.dreamdestination_update_Page);
 
 /* GET delete dreamdestination page */
-router.get('/delete', dreamdestination_controlers.dreamdestination_delete_Page);
+router.get('/delete', secured, dreamdestination_controlers.dreamdestination_delete_Page);
 
 // var express = require('express');
 // var router = express.Router();

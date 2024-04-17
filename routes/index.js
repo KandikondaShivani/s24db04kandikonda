@@ -2,12 +2,15 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var Account = require('../models/account');
+
 router.get('/', function (req, res) {
   res.render('index', { title: 'dreamdestination App', user: req.user });
 });
+
 router.get('/register', function (req, res) {
   res.render('register', { title: 'dreamdestination App Registration' });
 });
+
 router.post('/register', function (req, res) {
   Account.findOne({ username: req.body.username })
     .then(function (user) {
@@ -47,9 +50,11 @@ router.post('/register', function (req, res) {
 router.get('/login', function (req, res) {
   res.render('login', { title: 'dreamdestination App Login', user: req.user });
 });
+
 router.post('/login', passport.authenticate('local'), function (req, res) {
   res.redirect('/');
 });
+
 router.get('/logout', function (req, res) {
   req.logout(function (err) {
     if (err) { return next(err); }
@@ -59,12 +64,5 @@ router.get('/logout', function (req, res) {
 router.get('/ping', function (req, res) {
   res.status(200).send("pong!");
 });
-module.exports = router;
-router.get('/ping', function (req, res) {
-  res.status(200).send("pong!");
-});
-router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.redirect('/');
- });
 
 module.exports = router;
